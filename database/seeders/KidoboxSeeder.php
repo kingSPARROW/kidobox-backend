@@ -69,9 +69,9 @@ class KidoboxSeeder extends Seeder
                 ],
                 'contact' => [
                     'email' => 'hello@kidobox.com',
-                    'phone' => '+91 (022) 4890-KIDO',
+                    'phone' => '+91 7428866689',
                     'support_email' => 'support@kidobox.com',
-                    'address' => 'KIDOBOX Baby Essentials Pvt Ltd, Bandra West, Mumbai, MH 400050',
+                    'address' => 'RPS Tower, 12th Avenue, Tower 5, 2nd Floor, Office No. 218, Faridabad, Haryana – 121003',
                 ],
                 'settings' => [
                     'free_shipping_threshold' => 999.0,
