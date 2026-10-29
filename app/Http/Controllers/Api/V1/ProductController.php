@@ -12,6 +12,15 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    private function validateCollections(array $ids): void
+    {
+        foreach ($ids as $id) {
+            if (!\App\Models\Collection::where('_id', $id)->exists()) {
+                throw \Illuminate\Validation\ValidationException::withMessages(['collection_ids' => 'Select an existing collection.']);
+            }
+        }
+    }
+
     /**
      * List products with search, status filters, and pagination
      */
@@ -64,6 +73,7 @@ class ProductController extends Controller
             'vendor' => 'nullable|string|max:100',
             'product_type' => 'nullable|string|max:100',
             'tags' => 'nullable|array',
+            'tags.*' => 'string|max:255',
             'status' => 'required|in:draft,active,archived',
             'images' => 'nullable|array',
             'options' => 'nullable|array',
@@ -75,6 +85,7 @@ class ProductController extends Controller
             'seo_description' => 'nullable|string',
             'slug' => 'nullable|string|max:255',
             'collection_ids' => 'nullable|array',
+            'collection_ids.*' => 'string',
             // Default single-variant fields or array of variants
             'price' => 'nullable|numeric|min:0',
             'compare_at_price' => 'nullable|numeric|min:0',
@@ -82,8 +93,24 @@ class ProductController extends Controller
             'sku' => 'nullable|string|max:100',
             'barcode' => 'nullable|string|max:100',
             'inventory_quantity' => 'nullable|integer|min:0',
-            'variants' => 'nullable|array',
+            'variants' => 'nullable|array|min:1',
+            'variants.*.id' => 'nullable|string',
+            'variants.*._id' => 'nullable|string',
+            'variants.*.title' => 'required|string|max:255',
+            'variants.*.price' => 'required|numeric|min:0',
+            'variants.*.compare_at_price' => 'nullable|numeric|min:0',
+            'variants.*.cost_per_item' => 'nullable|numeric|min:0',
+            'variants.*.inventory_quantity' => 'required|integer|min:0',
+            'variants.*.sku' => 'nullable|string',
+            'variants.*.barcode' => 'nullable|string',
+            'variants.*.weight' => 'nullable|numeric|min:0',
+            'variants.*.weight_unit' => 'nullable|in:kg,g',
+            'variants.*.options_map' => 'nullable|array',
+            'variants.*.options_map.*' => 'string',
+            'variants.*.image_url' => 'nullable|string',
         ]);
+
+        $this->validateCollections($validated['collection_ids'] ?? []);
 
         $baseSlug = !empty($validated['slug']) ? Str::slug($validated['slug']) : Str::slug($validated['title']);
         $slug = $baseSlug;
@@ -148,7 +175,7 @@ class ProductController extends Controller
             }
         } else {
             // Create single default variant
-            $initialQty = (int) ($validated['inventory_quantity'] ?? 10);
+            $initialQty = (int) ($validated['inventory_quantity'] ?? 0);
             $variant = ProductVariant::create([
                 'product_id' => (string) $product->_id,
                 'title' => 'Default Title',
@@ -210,6 +237,7 @@ class ProductController extends Controller
             'vendor' => 'nullable|string|max:100',
             'product_type' => 'nullable|string|max:100',
             'tags' => 'nullable|array',
+            'tags.*' => 'string|max:255',
             'status' => 'nullable|in:draft,active,archived',
             'images' => 'nullable|array',
             'options' => 'nullable|array',
@@ -219,8 +247,23 @@ class ProductController extends Controller
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
             'collection_ids' => 'nullable|array',
+            'collection_ids.*' => 'string',
             'slug' => 'nullable|string|max:255',
-            'variants' => 'nullable|array',
+            'variants' => 'nullable|array|min:1',
+            'variants.*.id' => 'nullable|string',
+            'variants.*._id' => 'nullable|string',
+            'variants.*.title' => 'required|string|max:255',
+            'variants.*.price' => 'required|numeric|min:0',
+            'variants.*.compare_at_price' => 'nullable|numeric|min:0',
+            'variants.*.cost_per_item' => 'nullable|numeric|min:0',
+            'variants.*.inventory_quantity' => 'required|integer|min:0',
+            'variants.*.sku' => 'nullable|string',
+            'variants.*.barcode' => 'nullable|string',
+            'variants.*.weight' => 'nullable|numeric|min:0',
+            'variants.*.weight_unit' => 'nullable|in:kg,g',
+            'variants.*.options_map' => 'nullable|array',
+            'variants.*.options_map.*' => 'string',
+            'variants.*.image_url' => 'nullable|string',
             // Flat single-variant fallback fields
             'price' => 'nullable|numeric|min:0',
             'compare_at_price' => 'nullable|numeric|min:0',
@@ -229,6 +272,14 @@ class ProductController extends Controller
             'barcode' => 'nullable|string|max:100',
             'inventory_quantity' => 'nullable|integer|min:0',
         ]);
+
+        $this->validateCollections($validated['collection_ids'] ?? []);
+        foreach ($validated['variants'] ?? [] as $variant) {
+            $id = $variant['id'] ?? $variant['_id'] ?? null;
+            if ($id && !$product->variants->contains(fn ($v) => (string) $v->getKey() === $id)) {
+                throw \Illuminate\Validation\ValidationException::withMessages(['variants' => 'Variant does not belong to this product.']);
+            }
+        }
 
         $updateData = array_filter($validated, fn($key) => !in_array($key, [
             'variants', 'price', 'compare_at_price', 'cost_per_item', 'sku', 'barcode', 'inventory_quantity'
@@ -256,17 +307,17 @@ class ProductController extends Controller
         $product->update($updateData);
 
         if (!empty($validated['variants'])) {
+            $retained = [];
             foreach ($validated['variants'] as $vData) {
-                if (!empty($vData['id']) || !empty($vData['_id'])) {
-                    $variantId = $vData['id'] ?? $vData['_id'];
-                    $variant = ProductVariant::find($variantId);
-                    if ($variant && (string) $variant->product_id === (string) $product->_id) {
-                        $variant->update($vData);
-                    }
-                } else {
-                    ProductVariant::create(array_merge($vData, ['product_id' => (string) $product->_id]));
-                }
+                $variantId = $vData['id'] ?? $vData['_id'] ?? null;
+                $vData = \Illuminate\Support\Arr::only($vData, ['title', 'sku', 'barcode', 'price', 'compare_at_price', 'cost_per_item', 'inventory_quantity', 'weight', 'weight_unit', 'options_map', 'image_url']);
+                $variant = $variantId ? $product->variants->firstWhere('id', $variantId) : null;
+                if (!$variant && $variantId) $variant = ProductVariant::findOrFail($variantId);
+                if ($variant) $variant->update($vData);
+                else $variant = ProductVariant::create(array_merge($vData, ['product_id' => (string) $product->_id]));
+                $retained[] = (string) $variant->getKey();
             }
+            ProductVariant::where('product_id', (string) $product->_id)->whereNotIn('_id', $retained)->delete();
         } elseif (isset($validated['price']) || isset($validated['sku']) || isset($validated['inventory_quantity'])) {
             $firstVariant = $product->variants->first();
             if ($firstVariant) {

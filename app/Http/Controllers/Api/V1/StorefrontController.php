@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Banner;
+use App\Models\Discount;
+use App\Models\Testimonial;
+use App\Http\Resources\StorefrontProduct;
 use App\Models\Collection;
 use App\Models\Theme;
 use App\Models\Store;
@@ -48,15 +52,14 @@ class StorefrontController extends Controller
             ->where('status', 'active')
             ->with('variants')
             ->latest()
-            ->limit(8)
-            ->get();
+                        ->get();
 
         $collections = Collection::where('store_id', (string) $store->_id)
             ->where('is_published', true)
             ->get();
 
         $banners = \App\Models\Banner::where('store_id', (string) $store->_id)
-            ->where('status', 'active')
+            ->visible()
             ->orderBy('order', 'asc')
             ->get();
 
@@ -79,7 +82,11 @@ class StorefrontController extends Controller
             ],
             'theme' => $theme,
             'banners' => $banners,
-            'featured_products' => $featuredProducts,
+            'featured_products' => StorefrontProduct::collection($featuredProducts),
+            'products' => StorefrontProduct::collection($featuredProducts),
+            'content' => $store->content ?? (object) [],
+            'testimonials' => Testimonial::where('store_id', (string) $store->_id)->where('status', 'active')->orderBy('order')->get(),
+            'offers' => Discount::where('store_id', (string) $store->_id)->where('is_active', true)->get()->filter(fn ($offer) => $offer->isValidForCart(PHP_FLOAT_MAX))->map(fn ($offer) => $offer->only(['id', 'code', 'title', 'type', 'value', 'min_cart_amount', 'max_discount_amount', 'expires_at', 'eligible_collection_ids', 'eligible_product_ids']))->values(),
             'collections' => $collections,
         ]);
     }
@@ -107,30 +114,32 @@ class StorefrontController extends Controller
         }
 
         if ($collectionSlug = $request->query('collection')) {
-            $col = Collection::where('store_id', (string) $store->_id)->where('slug', $collectionSlug)->first();
+            $col = Collection::where('store_id', (string) $store->_id)->where('slug', $collectionSlug)->where('is_published', true)->first();
+            if (!$col) {
+                return response()->json(['success' => true, 'data' => [], 'meta' => ['total' => 0, 'current_page' => 1, 'last_page' => 1]]);
+            }
             if ($col) {
                 $query->where('collection_ids', (string) $col->_id);
             }
         }
 
+        // Variants live in a separate collection; sort their actual prices before slicing.
+        $products = $query->latest()->get();
         $sort = $request->query('sort', 'latest');
-        if ($sort === 'price-low-high') {
-            $query->orderBy('variants.price', 'asc');
-        } elseif ($sort === 'price-high-low') {
-            $query->orderBy('variants.price', 'desc');
-        } else {
-            $query->latest();
+        if (in_array($sort, ['price-low-high', 'price-high-low'])) {
+            $products = $products->sortBy(fn ($p) => $p->variants->min('price'), SORT_REGULAR, $sort === 'price-high-low')->values();
         }
-
-        $products = $query->paginate(20);
+        $page = max(1, (int) $request->query('page', 1));
+        $total = $products->count();
+        $items = $products->slice(($page - 1) * 20, 20)->values();
 
         return response()->json([
             'success' => true,
-            'data' => $products->items(),
+            'data' => StorefrontProduct::collection($items),
             'meta' => [
-                'total' => $products->total(),
-                'current_page' => $products->currentPage(),
-                'last_page' => $products->lastPage(),
+                'total' => $total,
+                'current_page' => $page,
+                'last_page' => max(1, (int) ceil($total / 20)),
             ],
         ]);
     }
@@ -147,6 +156,7 @@ class StorefrontController extends Controller
 
         $product = Product::where('store_id', (string) $store->_id)
             ->where('slug', $slug)
+            ->where('status', 'active')
             ->with('variants')
             ->firstOrFail();
 
@@ -160,8 +170,8 @@ class StorefrontController extends Controller
 
         return response()->json([
             'success' => true,
-            'product' => $product,
-            'related' => $relatedProducts,
+            'product' => new StorefrontProduct($product),
+            'related' => StorefrontProduct::collection($relatedProducts),
         ]);
     }
 }

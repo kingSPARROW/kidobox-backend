@@ -20,7 +20,6 @@ class NavigationController extends Controller
         }
 
         $storeId = (string) $store->_id;
-        $this->ensureDefaultMenus($storeId);
 
         $menus = Menu::where('store_id', $storeId)->get();
         $footerConfig = $this->getFooterConfig($store);
@@ -43,7 +42,6 @@ class NavigationController extends Controller
         }
 
         $storeId = (string) $store->_id;
-        $this->ensureDefaultMenus($storeId);
 
         $mainMenu = Menu::where('store_id', $storeId)
             ->where('handle', 'main-menu')
@@ -189,66 +187,11 @@ class NavigationController extends Controller
     {
         $stored = $store->settings['footer'] ?? $store->footer_config ?? [];
 
-        return [
-            'about_text' => $stored['about_text'] ?? 'Thoughtfully curated home essentials for a cleaner, calmer and happier home. Designed for modern Indian living spaces.',
-            'copyright_text' => $stored['copyright_text'] ?? '© 2026 HOMZY. Home Made Easy. All rights reserved.',
-            'show_newsletter' => $stored['show_newsletter'] ?? true,
-            'newsletter_title' => $stored['newsletter_title'] ?? 'Join the HOMZY Family',
-            'newsletter_subtitle' => $stored['newsletter_subtitle'] ?? 'Get exclusive offers, new arrivals and home inspiration straight to your inbox.',
-            'social_links' => $stored['social_links'] ?? [
-                ['platform' => 'Instagram', 'url' => 'https://instagram.com/homzy'],
-                ['platform' => 'Facebook', 'url' => 'https://facebook.com/homzy'],
-                ['platform' => 'Twitter', 'url' => 'https://twitter.com/homzy'],
-                ['platform' => 'Pinterest', 'url' => 'https://pinterest.com/homzy'],
-            ],
-            'columns' => $stored['columns'] ?? [
-                [
-                    'title' => 'Shop',
-                    'links' => [
-                        ['label' => 'Best Sellers', 'url' => '/products'],
-                        ['label' => 'New Arrivals', 'url' => '/products?filter=new'],
-                        ['label' => 'Offers & Deals', 'url' => '/products?filter=sale'],
-                        ['label' => 'Combos & Gifts', 'url' => '/products?category=gifts'],
-                        ['label' => 'Track My Order', 'url' => '/tracking'],
-                    ],
-                ],
-                [
-                    'title' => 'Categories',
-                    'links' => [
-                        ['label' => 'Plant Care & Garden', 'url' => '/collections/plant-care'],
-                        ['label' => 'Home & Kitchen Organizer', 'url' => '/collections/home-organizer'],
-                        ['label' => 'Decor Items & Planters', 'url' => '/collections/decor-items'],
-                        ['label' => 'Daily Use & Aromatherapy', 'url' => '/collections/daily-use'],
-                        ['label' => 'Baby Care Items', 'url' => '/collections/baby-care'],
-                    ],
-                ],
-                [
-                    'title' => 'Customer Care',
-                    'links' => [
-                        ['label' => 'Track Order', 'url' => '/tracking'],
-                        ['label' => 'Shipping Policy', 'url' => '/tracking'],
-                        ['label' => 'Returns & Refunds', 'url' => '/tracking'],
-                        ['label' => 'FAQs & Help', 'url' => '/tracking'],
-                        ['label' => 'Merchant Admin', 'url' => '/admin'],
-                    ],
-                ],
-                [
-                    'title' => 'Company',
-                    'links' => [
-                        ['label' => 'About HOMZY', 'url' => '/about'],
-                        ['label' => 'Our Story', 'url' => '/about'],
-                        ['label' => 'Blog & Home Tips', 'url' => '/blog'],
-                        ['label' => 'Careers', 'url' => '/careers'],
-                        ['label' => 'Terms & Privacy', 'url' => '/terms'],
-                    ],
-                ],
-            ],
-            'guarantees' => $stored['guarantees'] ?? [
-                ['title' => 'Free Delivery on Orders ₹499+', 'desc' => 'Across 28,000+ PIN codes with Shiprocket express tracking'],
-                ['title' => 'Cash on Delivery Available', 'desc' => '100% safe & verified delivery at your doorstep'],
-                ['title' => 'Easy 7-Day Returns & Exchange', 'desc' => 'Hassle-free reverse doorstep pickup guaranteed'],
-            ],
-        ];
+        return array_merge([
+            'about_text' => '', 'copyright_text' => '', 'show_newsletter' => false,
+            'newsletter_title' => '', 'newsletter_subtitle' => '',
+            'social_links' => [], 'columns' => [], 'guarantees' => [],
+        ], $stored);
     }
 
     /**

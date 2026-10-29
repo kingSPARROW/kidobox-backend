@@ -75,7 +75,7 @@ class BannerController extends Controller
             'success' => true,
             'message' => 'Banner created successfully.',
             'data' => $banner,
-        ], 210);
+        ], 201);
     }
 
     /**
@@ -160,7 +160,7 @@ class BannerController extends Controller
         }
 
         $banners = Banner::where('store_id', (string) $store->_id)
-            ->where('status', 'active')
+            ->visible()
             ->orderBy('order', 'asc')
             ->get();
 

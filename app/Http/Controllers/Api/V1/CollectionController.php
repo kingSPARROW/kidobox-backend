@@ -12,7 +12,9 @@ class CollectionController extends Controller
 {
     public function index()
     {
-        $collections = Collection::latest()->get();
+        $collections = Collection::latest()->get()->each(function ($collection) {
+            $collection->product_count = \App\Models\Product::where('collection_ids', (string) $collection->_id)->count();
+        });
 
         return response()->json([
             'success' => true,
@@ -98,6 +100,9 @@ class CollectionController extends Controller
     public function destroy($id)
     {
         $collection = Collection::findOrFail($id);
+        \App\Models\Product::where('collection_ids', (string) $collection->_id)->get()->each(function ($product) use ($collection) {
+            $product->update(['collection_ids' => array_values(array_diff($product->collection_ids ?? [], [(string) $collection->_id]))]);
+        });
         $collection->delete();
 
         AuditLog::record('collection_deleted', ['collection_id' => $id]);

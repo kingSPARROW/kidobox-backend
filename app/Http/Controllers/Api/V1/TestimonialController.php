@@ -11,65 +11,11 @@ use Illuminate\Http\Request;
 class TestimonialController extends Controller
 {
     /**
-     * Default testimonials for initial seed
-     */
-    private function seedDefaultsIfNeeded($storeId)
-    {
-        if (Testimonial::where('store_id', (string) $storeId)->count() === 0) {
-            $defaults = [
-                [
-                    'store_id' => (string) $storeId,
-                    'author_name' => 'Priya Sharma',
-                    'avatar_url' => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
-                    'rating' => 5,
-                    'content' => 'Amazing quality and beautiful packaging! The candle smells divine and instantly makes my home feel so calm.',
-                    'location' => 'Mumbai, MH',
-                    'is_verified' => true,
-                    'status' => 'active',
-                    'order' => 1,
-                    'product_title' => 'Botanical Amber Glass Soy Candle',
-                ],
-                [
-                    'store_id' => (string) $storeId,
-                    'author_name' => 'Rahul Mehta',
-                    'avatar_url' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
-                    'rating' => 5,
-                    'content' => 'Super useful tiered plant stands and storage bins. Great quality and very sturdy. My kitchen and balcony look so organized too.',
-                    'location' => 'Bengaluru, KA',
-                    'is_verified' => true,
-                    'status' => 'active',
-                    'order' => 2,
-                    'product_title' => 'Tiered Metal Plant Stand Set',
-                ],
-                [
-                    'store_id' => (string) $storeId,
-                    'author_name' => 'Sneha Kapoor',
-                    'avatar_url' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-                    'rating' => 5,
-                    'content' => 'Loved the mats and woven baskets! Soft, absorbent, and perfect for daily use. HOMZY never disappoints.',
-                    'location' => 'New Delhi, DL',
-                    'is_verified' => true,
-                    'status' => 'active',
-                    'order' => 3,
-                    'product_title' => 'Handwoven Macrame Basket',
-                ],
-            ];
-
-            foreach ($defaults as $item) {
-                Testimonial::create($item);
-            }
-        }
-    }
-
-    /**
      * List all testimonials for merchant admin
      */
     public function index(Request $request)
     {
         $store = app('current_store') ?? Store::first();
-        if ($store) {
-            $this->seedDefaultsIfNeeded($store->_id);
-        }
 
         $query = Testimonial::query()->orderBy('order', 'asc');
 
@@ -216,7 +162,6 @@ class TestimonialController extends Controller
             return response()->json(['success' => true, 'data' => []]);
         }
 
-        $this->seedDefaultsIfNeeded($store->_id);
 
         $testimonials = Testimonial::where('store_id', (string) $store->_id)
             ->where('status', 'active')

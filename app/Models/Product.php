@@ -34,12 +34,12 @@ class Product extends Model
 
     protected $casts = [
         'images' => 'array',
-        'tags' => 'array',
+        'tags' => \App\Casts\NativeArray::class,
         'options' => 'array',
         'has_variants' => 'boolean',
         'tax_rate' => 'float',
         'seo' => 'array',
-        'collection_ids' => 'array',
+        'collection_ids' => \App\Casts\NativeArray::class,
     ];
 
     public function variants()

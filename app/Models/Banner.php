@@ -32,6 +32,13 @@ class Banner extends Model
         'end_date',
     ];
 
+    public function scopeVisible($query)
+    {
+        return $query->whereIn('status', ['active', 'scheduled'])
+            ->where(fn ($q) => $q->whereNull('start_date')->orWhere('start_date', '<=', now()))
+            ->where(fn ($q) => $q->whereNull('end_date')->orWhere('end_date', '>=', now()));
+    }
+
     protected $casts = [
         'overlay_opacity' => 'float',
         'order' => 'integer',

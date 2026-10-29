@@ -69,6 +69,9 @@ Route::prefix('v1')->group(function () {
         Route::post('/auth/logout', [AuthController::class, 'logout']);
         Route::post('/store/onboarding', [AuthController::class, 'updateOnboarding']);
 
+        Route::get('/content', [\App\Http\Controllers\Api\V1\ContentController::class, 'show']);
+        Route::put('/content', [\App\Http\Controllers\Api\V1\ContentController::class, 'update']);
+
         // Store Settings
         Route::get('/store', [StoreController::class, 'show']);
         Route::put('/store', [StoreController::class, 'update']);

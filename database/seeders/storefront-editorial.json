@@ -1,0 +1,198 @@
+{
+  "ages": [
+    {
+      "slug": "newborn",
+      "title": "0–6 Months",
+      "subtitle": "Newborn Care",
+      "image": "newborn",
+      "age": "0-6",
+      "color": "yellow-bg",
+      "description": "The softest beginnings. Discover little essentials for your very first moments together."
+    },
+    {
+      "slug": "baby",
+      "title": "6–12 Months",
+      "subtitle": "Growth & Exploration",
+      "image": "baby",
+      "age": "6-12",
+      "color": "blue-bg",
+      "description": "New tastes, new discoveries, and so many firsts. Essentials for a growing little explorer."
+    },
+    {
+      "slug": "toddler",
+      "title": "1–2 Years",
+      "subtitle": "Active Toddlers",
+      "image": "toddler",
+      "age": "1-2",
+      "color": "yellow-bg",
+      "description": "Made for busy little hands, curious minds, and those very first adventures."
+    },
+    {
+      "slug": "kids",
+      "title": "2+ Years",
+      "subtitle": "Little Explorers",
+      "image": "kid",
+      "age": "2+",
+      "color": "mint-bg",
+      "description": "Big imaginations start small. Find playful favorites for their next chapter."
+    }
+  ],
+  "articles": [
+    {
+      "slug": "newborn-essentials-checklist",
+      "title": "Your Little One’s First Wardrobe: A Simple Checklist",
+      "category": "NEWBORN CARE",
+      "image": "blog1",
+      "minutes": 5,
+      "excerpt": "A gentle guide to choosing comfortable everyday pieces for your baby’s earliest days.",
+      "sections": [
+        [
+          "Start with the everyday pieces",
+          "A few comfortable rompers, soft socks, and easy layers can make a lovely starting point. Think about the weather, your laundry routine, and the outfits you will reach for most often. You can always add more once you learn what works for your family."
+        ],
+        [
+          "Choose comfort and convenience",
+          "Look for soft fabrics, smooth seams, and fastenings that make changes easier. A slightly roomy fit gives your little one freedom to move. Check the size guide and care label before choosing."
+        ],
+        [
+          "Build a small, practical rotation",
+          "Organize the drawer by size and type so you can find a fresh outfit quickly. Keep a spare set in your changing bag. Simple colors and prints are easy to mix, match, and pass along."
+        ],
+        [
+          "Leave room for little discoveries",
+          "Every family’s routine looks a little different. Start simply and make your collection your own. A thoughtfully chosen wardrobe is about comfort, not having one of everything."
+        ]
+      ]
+    },
+    {
+      "slug": "happy-little-mealtimes",
+      "title": "Little Spoons, Big Discoveries: Setting Up for Mealtimes",
+      "category": "FEEDING",
+      "image": "blog2",
+      "minutes": 4,
+      "excerpt": "Practical ways to make the everyday mealtime setup calmer, simpler, and easier to clean.",
+      "sections": [
+        [
+          "Create a calm little space",
+          "Choose a convenient place for everyday meals and keep your essential items nearby. A bowl, an easy-to-hold spoon, and a wipe-clean surface can help make the routine feel manageable."
+        ],
+        [
+          "Choose everyday tools thoughtfully",
+          "Think about grip, weight, cleaning, and storage when choosing feeding accessories. Check the manufacturer’s age guidance and care instructions. Your pediatrician can advise when your baby is ready for different feeding stages."
+        ],
+        [
+          "Keep the cleanup simple",
+          "Set aside a small basket for clean bibs, spoons, and cloths. Wash feeding items according to their instructions and let them dry completely. A simple routine means a little more time for the moments that matter."
+        ],
+        [
+          "Enjoy the shared moments",
+          "There is plenty to discover at the table. Make space for everyday connection, and remember that progress looks different for every child. Always supervise your little one during meals."
+        ]
+      ]
+    },
+    {
+      "slug": "choosing-playtime-favorites",
+      "title": "How to Choose Playtime Favorites for Curious Little Minds",
+      "category": "PLAY & DEVELOPMENT",
+      "image": "blog3",
+      "minutes": 5,
+      "excerpt": "Thoughtful toy shopping starts with the little things your child loves to explore.",
+      "sections": [
+        [
+          "Follow their curiosity",
+          "Notice the shapes, textures, and activities your child returns to. A few well-chosen favorites can invite lots of different kinds of play. Look for toys that feel suited to their current interests."
+        ],
+        [
+          "Read the age label",
+          "Choose toys with an age recommendation that fits your child. Inspect pieces regularly and follow the maker’s care and safety instructions. Put damaged toys aside and supervise play as appropriate."
+        ],
+        [
+          "Try a simple toy rotation",
+          "Keep a small selection within easy reach and store the rest away. Swapping the selection from time to time can make familiar toys feel interesting again, while helping the play area stay tidy."
+        ],
+        [
+          "Make room for shared play",
+          "A story, a silly voice, or a few minutes of your attention can turn a familiar toy into a new adventure. The best playtime is often a little less planned and a little more together."
+        ]
+      ]
+    },
+    {
+      "slug": "dreamy-nursery-details",
+      "title": "Small Details That Make a Nursery Feel Like Home",
+      "category": "NURSERY",
+      "image": "nursery",
+      "minutes": 4,
+      "excerpt": "Soft colors, useful storage, and a few personal touches for a space that grows with your family.",
+      "sections": [
+        [
+          "Begin with the feeling",
+          "Choose a small palette that feels calm and welcoming to you. Cream, blush, sage, and warm wood tones are easy to combine. A few favorite colors can tie the whole room together."
+        ],
+        [
+          "Make space for the everyday routine",
+          "Think through where you will keep clothing, changing essentials, and books. Practical storage within easy reach can make small daily tasks feel a little smoother. Secure furniture according to the manufacturer’s guidance."
+        ],
+        [
+          "Add a personal little touch",
+          "A favorite print, a family photograph, or a tiny shelf of books can give the space its own story. Keep decorations clear of the baby’s sleeping space and follow current local safe-sleep guidance."
+        ],
+        [
+          "Let the room grow slowly",
+          "You do not need to finish every detail at once. Let your routine and your little one’s changing interests guide the next additions. A lived-in, much-loved room is beautiful in its own way."
+        ]
+      ]
+    },
+    {
+      "slug": "changing-bag-checklist",
+      "title": "The Everyday Changing Bag: A Less-Is-More Checklist",
+      "category": "EVERYDAY PARENTING",
+      "image": "wipes",
+      "minutes": 3,
+      "excerpt": "A small collection of practical essentials for your next little outing.",
+      "sections": [
+        [
+          "Pack for your usual outing",
+          "Think about the length of your trip and what you normally need. A few diapers, wipes, a changing mat, and a spare outfit make a useful starting point. Adjust the list for your own family."
+        ],
+        [
+          "Give everything a place",
+          "Use small pouches or compartments to keep clean clothes, changing items, and little extras separate. The easier something is to find, the easier it is to get out the door."
+        ],
+        [
+          "Reset when you return",
+          "Replace what you used and check for anything that needs washing. A quick reset after an outing can save time before the next one."
+        ],
+        [
+          "Keep it comfortable to carry",
+          "A lighter bag can make a big difference to your day. Review the contents regularly and take out things you rarely use. Your everyday essentials can change as your little one grows."
+        ]
+      ]
+    },
+    {
+      "slug": "gifting-for-little-arrivals",
+      "title": "A Little Gift Guide for Beautiful New Beginnings",
+      "category": "GIFTING",
+      "image": "clothing",
+      "minutes": 4,
+      "excerpt": "Thoughtful ways to celebrate a new arrival, with comfort and everyday usefulness in mind.",
+      "sections": [
+        [
+          "Choose something useful and lovely",
+          "A soft outfit, a carefully chosen nursery detail, or a practical everyday essential can make a thoughtful gift. Consider the family’s preferences and the season when choosing."
+        ],
+        [
+          "Consider the next size up",
+          "Babies grow quickly, and families may already have plenty of newborn pieces. An outfit in a later size can be a welcome addition to the drawer. Include a gift receipt when available."
+        ],
+        [
+          "Think of the parents, too",
+          "A kind note or an offer to help can mean just as much as a wrapped present. Little gestures can be a lovely way to show that you are thinking of the whole family."
+        ],
+        [
+          "Make it personal",
+          "Choose a color, print, or theme that reminds you of the family. A simple message about why you chose the gift can make it even more memorable."
+        ]
+      ]
+    }
+  ]
+}

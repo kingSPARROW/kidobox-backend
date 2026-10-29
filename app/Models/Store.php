@@ -17,6 +17,7 @@ class Store extends Model
         'currency',
         'timezone',
         'status', // 'active', 'setup', 'suspended'
+        'content',
         'branding', // ['logo_url', 'favicon_url', 'primary_color', 'font_family']
         'contact', // ['email', 'phone', 'support_email', 'address', 'city', 'state', 'postal_code', 'country']
         'settings', // ['tax_mode', 'default_gst_rate', 'allow_cod', 'cod_fee', 'free_shipping_threshold']
@@ -26,6 +27,7 @@ class Store extends Model
     ];
 
     protected $casts = [
+        'content' => 'array',
         'branding' => 'array',
         'contact' => 'array',
         'settings' => 'array',
