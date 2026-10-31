@@ -92,7 +92,9 @@ class CheckoutController extends Controller
         $discountAmount = 0.0;
         $discountModel = null;
         if (!empty($validated['discount_code'])) {
-            $discountModel = Discount::where('store_id', (string) $store->_id)
+            $discountModel = Discount::where(function($q) use ($store) {
+                    $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+                })
                 ->where('code', strtoupper(trim($validated['discount_code'])))
                 ->first();
 

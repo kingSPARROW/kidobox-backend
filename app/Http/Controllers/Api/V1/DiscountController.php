@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discount;
+use App\Models\Store;
 use App\Models\AuditLog;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,8 @@ class DiscountController extends Controller
     {
         $validated = $request->validate([
             'code' => 'required|string|max:50',
-            'title' => 'required|string|max:255',
-            'type' => 'required|in:percentage,fixed_amount,free_shipping',
+            'title' => 'nullable|string|max:255',
+            'type' => 'required|in:percentage,fixed_amount,fixed,free_shipping',
             'value' => 'required|numeric|min:0',
             'min_cart_amount' => 'nullable|numeric|min:0',
             'max_discount_amount' => 'nullable|numeric|min:0',
@@ -35,11 +36,16 @@ class DiscountController extends Controller
         ]);
 
         $code = strtoupper(trim($validated['code']));
+        $type = $validated['type'] === 'fixed' ? 'fixed_amount' : $validated['type'];
+        $title = !empty($validated['title']) ? $validated['title'] : ($code . ' Promotion');
+
+        $store = app('current_store') ?? Store::first();
 
         $discount = Discount::create([
+            'store_id' => $store ? (string) $store->_id : null,
             'code' => $code,
-            'title' => $validated['title'],
-            'type' => $validated['type'],
+            'title' => $title,
+            'type' => $type,
             'value' => (float) $validated['value'],
             'min_cart_amount' => (float) ($validated['min_cart_amount'] ?? 0),
             'max_discount_amount' => isset($validated['max_discount_amount']) ? (float) $validated['max_discount_amount'] : null,

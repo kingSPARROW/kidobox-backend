@@ -67,6 +67,7 @@ Route::prefix('v1')->group(function () {
         // Merchant Profile & Store Context
         Route::get('/auth/me', [AuthController::class, 'me']);
         Route::post('/auth/logout', [AuthController::class, 'logout']);
+        Route::post('/auth/change-password', [AuthController::class, 'updatePassword']);
         Route::post('/store/onboarding', [AuthController::class, 'updateOnboarding']);
 
         Route::get('/content', [\App\Http\Controllers\Api\V1\ContentController::class, 'show']);

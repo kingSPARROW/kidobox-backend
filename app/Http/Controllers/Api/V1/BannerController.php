@@ -38,6 +38,14 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->has('desktop_image_url')) {
+            if ($request->has('image')) {
+                $request->merge(['desktop_image_url' => $request->input('image')]);
+            } elseif ($request->has('image_url')) {
+                $request->merge(['desktop_image_url' => $request->input('image_url')]);
+            }
+        }
+
         $validated = $request->validate([
             'title' => 'nullable|string|max:255',
             'title_tag' => 'nullable|string|max:100',
@@ -50,7 +58,7 @@ class BannerController extends Controller
             'secondary_cta_link' => 'nullable|string|max:255',
             'text_alignment' => 'nullable|in:left,center,right',
             'overlay_opacity' => 'nullable|numeric|min:0|max:1',
-            'status' => 'required|in:active,scheduled,inactive',
+            'status' => 'nullable|in:active,scheduled,inactive',
             'position' => 'nullable|in:hero,promotional_strip,footer_banner',
             'order' => 'nullable|integer',
             'start_date' => 'nullable|date',
@@ -62,10 +70,16 @@ class BannerController extends Controller
             $validated['mobile_image_url'] = $validated['desktop_image_url'];
         }
 
+        $validated['status'] = $validated['status'] ?? 'active';
         $validated['text_alignment'] = $validated['text_alignment'] ?? 'left';
         $validated['overlay_opacity'] = isset($validated['overlay_opacity']) ? (float) $validated['overlay_opacity'] : 0.55;
         $validated['position'] = $validated['position'] ?? 'hero';
         $validated['order'] = $validated['order'] ?? (Banner::count() + 1);
+
+        $store = app('current_store') ?? Store::first();
+        if ($store) {
+            $validated['store_id'] = (string) $store->_id;
+        }
 
         $banner = Banner::create($validated);
 
@@ -159,7 +173,9 @@ class BannerController extends Controller
             return response()->json(['success' => true, 'data' => []]);
         }
 
-        $banners = Banner::where('store_id', (string) $store->_id)
+        $banners = Banner::where(function($q) use ($store) {
+                $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+            })
             ->visible()
             ->orderBy('order', 'asc')
             ->get();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Collection;
+use App\Models\Store;
 use App\Models\AuditLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ class CollectionController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image_url' => 'nullable|string',
-            'type' => 'required|in:manual,automated',
+            'type' => 'nullable|in:manual,automated',
             'rules' => 'nullable|array',
             'sort_order' => 'nullable|string',
             'seo' => 'nullable|array',
@@ -43,12 +44,15 @@ class CollectionController extends Controller
             $counter++;
         }
 
+        $store = app('current_store') ?? Store::first();
+
         $collection = Collection::create([
+            'store_id' => $store ? (string) $store->_id : null,
             'title' => $validated['title'],
             'slug' => $slug,
             'description' => $validated['description'] ?? '',
             'image_url' => $validated['image_url'] ?? null,
-            'type' => $validated['type'],
+            'type' => $validated['type'] ?? 'manual',
             'rules' => $validated['rules'] ?? [],
             'sort_order' => $validated['sort_order'] ?? 'best-selling',
             'seo' => $validated['seo'] ?? ['title' => $validated['title'], 'description' => ''],

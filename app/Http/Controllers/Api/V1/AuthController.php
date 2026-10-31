@@ -214,6 +214,33 @@ class AuthController extends Controller
     }
 
     /**
+     * Update Merchant Password
+     */
+    public function updatePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6',
+        ]);
+
+        $merchant = $request->user();
+        if (!$merchant || !Hash::check($validated['current_password'], $merchant->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => ['The current password provided is incorrect.'],
+            ]);
+        }
+
+        $merchant->update([
+            'password' => Hash::make($validated['new_password']),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Password updated successfully.',
+        ]);
+    }
+
+    /**
      * Logout
      */
     public function logout(Request $request)

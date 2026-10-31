@@ -54,11 +54,15 @@ class StorefrontController extends Controller
             ->latest()
                         ->get();
 
-        $collections = Collection::where('store_id', (string) $store->_id)
+        $collections = Collection::where(function($q) use ($store) {
+                $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+            })
             ->where('is_published', true)
             ->get();
 
-        $banners = \App\Models\Banner::where('store_id', (string) $store->_id)
+        $banners = \App\Models\Banner::where(function($q) use ($store) {
+                $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+            })
             ->visible()
             ->orderBy('order', 'asc')
             ->get();
@@ -85,8 +89,12 @@ class StorefrontController extends Controller
             'featured_products' => StorefrontProduct::collection($featuredProducts),
             'products' => StorefrontProduct::collection($featuredProducts),
             'content' => $store->content ?? (object) [],
-            'testimonials' => Testimonial::where('store_id', (string) $store->_id)->where('status', 'active')->orderBy('order')->get(),
-            'offers' => Discount::where('store_id', (string) $store->_id)->where('is_active', true)->get()->filter(fn ($offer) => $offer->isValidForCart(PHP_FLOAT_MAX))->map(fn ($offer) => $offer->only(['id', 'code', 'title', 'type', 'value', 'min_cart_amount', 'max_discount_amount', 'expires_at', 'eligible_collection_ids', 'eligible_product_ids']))->values(),
+            'testimonials' => Testimonial::where(function($q) use ($store) {
+                    $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+                })->where('status', 'active')->orderBy('order')->get(),
+            'offers' => Discount::where(function($q) use ($store) {
+                    $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+                })->where('is_active', true)->get()->filter(fn ($offer) => $offer->isValidForCart(PHP_FLOAT_MAX))->map(fn ($offer) => $offer->only(['id', 'code', 'title', 'type', 'value', 'min_cart_amount', 'max_discount_amount', 'expires_at', 'eligible_collection_ids', 'eligible_product_ids']))->values(),
             'collections' => $collections,
         ]);
     }

@@ -45,15 +45,21 @@ class TestimonialController extends Controller
             'content' => 'required|string|max:1000',
             'location' => 'nullable|string|max:100',
             'is_verified' => 'boolean',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
             'order' => 'nullable|integer',
             'product_title' => 'nullable|string|max:150',
         ]);
 
+        $validated['status'] = $validated['status'] ?? 'active';
         $validated['order'] = $validated['order'] ?? (Testimonial::count() + 1);
         $validated['is_verified'] = $validated['is_verified'] ?? true;
         if (empty($validated['avatar_url'])) {
             $validated['avatar_url'] = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80';
+        }
+
+        $store = app('current_store') ?? Store::first();
+        if ($store) {
+            $validated['store_id'] = (string) $store->_id;
         }
 
         $testimonial = Testimonial::create($validated);
@@ -163,7 +169,9 @@ class TestimonialController extends Controller
         }
 
 
-        $testimonials = Testimonial::where('store_id', (string) $store->_id)
+        $testimonials = Testimonial::where(function($q) use ($store) {
+                $q->where('store_id', (string) $store->_id)->orWhereNull('store_id');
+            })
             ->where('status', 'active')
             ->orderBy('order', 'asc')
             ->get();
