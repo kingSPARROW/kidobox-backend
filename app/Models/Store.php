@@ -21,7 +21,8 @@ class Store extends Model
         'branding', // ['logo_url', 'favicon_url', 'primary_color', 'font_family']
         'contact', // ['email', 'phone', 'support_email', 'address', 'city', 'state', 'postal_code', 'country']
         'settings', // ['tax_mode', 'default_gst_rate', 'allow_cod', 'cod_fee', 'free_shipping_threshold']
-        'seo', // ['title_tag', 'meta_description', 'social_image_url', 'google_verification', 'allow_indexing', 'canonical_url']
+        'seo', // ['title_tag', 'meta_description', 'social_image_url', 'google_verification', 'allow_indexing', 'canonical_url', 'meta_robots', 'schema_markup']
+        'page_seo', // Per-page SEO overrides: { [pagePathOrKey]: { title, description, heading_h1, heading_h2, heading_h3, canonical_url, meta_robots, schema_markup } }
         'onboarding_completed',
         'onboarding_step',
     ];
@@ -32,6 +33,7 @@ class Store extends Model
         'contact' => 'array',
         'settings' => 'array',
         'seo' => 'array',
+        'page_seo' => 'array',
         'onboarding_completed' => 'boolean',
         'onboarding_step' => 'integer',
     ];

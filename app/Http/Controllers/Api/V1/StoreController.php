@@ -60,12 +60,16 @@ class StoreController extends Controller
             'settings.cod_fee' => 'nullable|numeric',
             'settings.free_shipping_threshold' => 'nullable|numeric',
             'seo' => 'nullable|array',
-            'seo.title_tag' => 'nullable|string|max:100',
-            'seo.meta_description' => 'nullable|string|max:350',
+            'seo.title_tag' => 'nullable|string|max:150',
+            'seo.title_template' => 'nullable|string|max:100',
+            'seo.meta_description' => 'nullable|string|max:500',
             'seo.social_image_url' => 'nullable|string',
-            'seo.google_verification' => 'nullable|string|max:100',
+            'seo.google_verification' => 'nullable|string|max:150',
             'seo.allow_indexing' => 'nullable|boolean',
             'seo.canonical_url' => 'nullable|string|max:255',
+            'seo.meta_robots' => 'nullable|string|max:100',
+            'seo.schema_markup' => 'nullable|string',
+            'page_seo' => 'nullable|array',
         ]);
 
         $updateData = [];
@@ -86,6 +90,9 @@ class StoreController extends Controller
         }
         if (isset($validated['seo'])) {
             $updateData['seo'] = array_merge($store->seo ?? [], $validated['seo']);
+        }
+        if (isset($validated['page_seo'])) {
+            $updateData['page_seo'] = array_merge($store->page_seo ?? [], $validated['page_seo']);
         }
 
         $store->update($updateData);

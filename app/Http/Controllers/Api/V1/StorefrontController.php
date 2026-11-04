@@ -83,6 +83,7 @@ class StorefrontController extends Controller
                     'social_image_url' => '/assets/hd/hero.webp',
                     'allow_indexing' => true,
                 ],
+                'page_seo' => $store->page_seo ?? [],
             ],
             'theme' => $theme,
             'banners' => $banners,

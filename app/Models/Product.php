@@ -26,9 +26,16 @@ class Product extends Model
         'has_variants',
         'hsn_code',
         'tax_rate',
-        'seo', // ['title', 'description']
+        'seo', // ['title', 'description', 'canonical_url', 'meta_robots', 'schema_markup', 'focus_keyword']
         'seo_title',
         'seo_description',
+        'heading_h1',
+        'heading_h2',
+        'heading_h3',
+        'canonical_url',
+        'meta_robots',
+        'schema_markup',
+        'focus_keyword',
         'collection_ids',
     ];
 

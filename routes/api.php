@@ -77,6 +77,10 @@ Route::prefix('v1')->group(function () {
         Route::get('/store', [StoreController::class, 'show']);
         Route::put('/store', [StoreController::class, 'update']);
 
+        // SEO & On-Page Meta Management
+        Route::get('/seo', [\App\Http\Controllers\Api\V1\SeoController::class, 'index']);
+        Route::put('/seo', [\App\Http\Controllers\Api\V1\SeoController::class, 'update']);
+
         // Dashboard Analytics
         Route::get('/dashboard/analytics', [DashboardAnalyticsController::class, 'index']);
 

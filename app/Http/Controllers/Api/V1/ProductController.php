@@ -83,6 +83,13 @@ class ProductController extends Controller
             'seo' => 'nullable|array',
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
+            'heading_h1' => 'nullable|string|max:255',
+            'heading_h2' => 'nullable|string|max:255',
+            'heading_h3' => 'nullable|string|max:255',
+            'canonical_url' => 'nullable|string|max:500',
+            'meta_robots' => 'nullable|string|max:100',
+            'schema_markup' => 'nullable|string',
+            'focus_keyword' => 'nullable|string|max:100',
             'slug' => 'nullable|string|max:255',
             'collection_ids' => 'nullable|array',
             'collection_ids.*' => 'string',
@@ -122,6 +129,10 @@ class ProductController extends Controller
 
         $seoTitle = $validated['seo_title'] ?? ($validated['seo']['title'] ?? $validated['title']);
         $seoDesc = $validated['seo_description'] ?? ($validated['seo']['description'] ?? Str::limit(strip_tags($validated['description'] ?? ''), 160));
+        $canonicalUrl = $validated['canonical_url'] ?? ($validated['seo']['canonical_url'] ?? null);
+        $metaRobots = $validated['meta_robots'] ?? ($validated['seo']['meta_robots'] ?? 'index, follow');
+        $schemaMarkup = $validated['schema_markup'] ?? ($validated['seo']['schema_markup'] ?? null);
+        $focusKeyword = $validated['focus_keyword'] ?? ($validated['seo']['focus_keyword'] ?? null);
 
         $product = Product::create([
             'title' => $validated['title'],
@@ -136,11 +147,22 @@ class ProductController extends Controller
             'has_variants' => $validated['has_variants'] ?? (!empty($validated['variants'])),
             'hsn_code' => $validated['hsn_code'] ?? '9403', // Homeware default HSN
             'tax_rate' => $validated['tax_rate'] ?? 18.0,
+            'heading_h1' => $validated['heading_h1'] ?? null,
+            'heading_h2' => $validated['heading_h2'] ?? null,
+            'heading_h3' => $validated['heading_h3'] ?? null,
+            'canonical_url' => $canonicalUrl,
+            'meta_robots' => $metaRobots,
+            'schema_markup' => $schemaMarkup,
+            'focus_keyword' => $focusKeyword,
             'seo_title' => $seoTitle,
             'seo_description' => $seoDesc,
             'seo' => [
                 'title' => $seoTitle,
                 'description' => $seoDesc,
+                'canonical_url' => $canonicalUrl,
+                'meta_robots' => $metaRobots,
+                'schema_markup' => $schemaMarkup,
+                'focus_keyword' => $focusKeyword,
             ],
             'collection_ids' => $validated['collection_ids'] ?? [],
         ]);
@@ -244,8 +266,16 @@ class ProductController extends Controller
             'has_variants' => 'nullable|boolean',
             'hsn_code' => 'nullable|string|max:20',
             'tax_rate' => 'nullable|numeric|min:0|max:100',
+            'seo' => 'nullable|array',
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
+            'heading_h1' => 'nullable|string|max:255',
+            'heading_h2' => 'nullable|string|max:255',
+            'heading_h3' => 'nullable|string|max:255',
+            'canonical_url' => 'nullable|string|max:500',
+            'meta_robots' => 'nullable|string|max:100',
+            'schema_markup' => 'nullable|string',
+            'focus_keyword' => 'nullable|string|max:100',
             'collection_ids' => 'nullable|array',
             'collection_ids.*' => 'string',
             'slug' => 'nullable|string|max:255',
@@ -297,12 +327,27 @@ class ProductController extends Controller
             $updateData['slug'] = $slug;
         }
 
-        if (!empty($validated['seo_title']) || !empty($validated['seo_description'])) {
-            $updateData['seo'] = [
-                'title' => $validated['seo_title'] ?? $product->seo_title,
-                'description' => $validated['seo_description'] ?? $product->seo_description,
-            ];
-        }
+        $seoTitle = $validated['seo_title'] ?? ($validated['seo']['title'] ?? $product->seo_title);
+        $seoDesc = $validated['seo_description'] ?? ($validated['seo']['description'] ?? $product->seo_description);
+        $canonicalUrl = $validated['canonical_url'] ?? ($validated['seo']['canonical_url'] ?? $product->canonical_url);
+        $metaRobots = $validated['meta_robots'] ?? ($validated['seo']['meta_robots'] ?? ($product->meta_robots ?? 'index, follow'));
+        $schemaMarkup = $validated['schema_markup'] ?? ($validated['seo']['schema_markup'] ?? $product->schema_markup);
+        $focusKeyword = $validated['focus_keyword'] ?? ($validated['seo']['focus_keyword'] ?? $product->focus_keyword);
+
+        $updateData['seo_title'] = $seoTitle;
+        $updateData['seo_description'] = $seoDesc;
+        $updateData['canonical_url'] = $canonicalUrl;
+        $updateData['meta_robots'] = $metaRobots;
+        $updateData['schema_markup'] = $schemaMarkup;
+        $updateData['focus_keyword'] = $focusKeyword;
+        $updateData['seo'] = [
+            'title' => $seoTitle,
+            'description' => $seoDesc,
+            'canonical_url' => $canonicalUrl,
+            'meta_robots' => $metaRobots,
+            'schema_markup' => $schemaMarkup,
+            'focus_keyword' => $focusKeyword,
+        ];
 
         $product->update($updateData);
 

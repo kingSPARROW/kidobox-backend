@@ -63,6 +63,7 @@ class BannerController extends Controller
             'order' => 'nullable|integer',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
+            'alt_text' => 'nullable|string|max:255',
         ]);
 
         // Default mobile image to desktop if not provided
@@ -129,6 +130,7 @@ class BannerController extends Controller
             'order' => 'nullable|integer',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
+            'alt_text' => 'nullable|string|max:255',
         ]);
 
         if (array_key_exists('mobile_image_url', $validated) && empty($validated['mobile_image_url']) && !empty($validated['desktop_image_url'])) {

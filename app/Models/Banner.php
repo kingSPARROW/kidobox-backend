@@ -19,6 +19,7 @@ class Banner extends Model
         'subtitle',
         'desktop_image_url',     // High-res widescreen for desktop view
         'mobile_image_url',      // Aspect ratio optimized for mobile view
+        'alt_text',              // SEO & Accessibility ALT description
         'cta_text',
         'cta_link',
         'secondary_cta_text',

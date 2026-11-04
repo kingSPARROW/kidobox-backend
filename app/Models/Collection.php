@@ -18,6 +18,13 @@ class Collection extends Model
         'slug',
         'description',
         'image_url',
+        'image_alt',
+        'heading_h1',
+        'heading_h2',
+        'heading_h3',
+        'canonical_url',
+        'meta_robots',
+        'schema_markup',
         'type', // 'manual', 'automated'
         'rules', // e.g. [{"column": "tag", "relation": "equals", "condition": "summer"}]
         'sort_order', // 'best-selling', 'price-ascending', 'created-descending'

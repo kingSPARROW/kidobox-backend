@@ -34,6 +34,17 @@ class ContentController extends Controller
         $rules['content.articles.*.sections'] = 'required|array';
         $rules['content.articles.*.sections.*'] = 'array|size:2';
         $rules['content.articles.*.sections.*.*'] = 'string|max:20000';
+
+        // Optional SEO & Publishing fields for Articles / Guides
+        $optionalArticleFields = [
+            'image_alt', 'status', 'seo_title', 'seo_description',
+            'canonical_url', 'meta_robots', 'schema_markup', 'heading_h1',
+            'author', 'published_at'
+        ];
+        foreach ($optionalArticleFields as $optField) {
+            $rules["content.articles.*.$optField"] = 'sometimes|nullable|string|max:50000';
+        }
+        $rules['content.articles.*.is_published'] = 'sometimes|nullable|boolean';
         foreach (['newborn', 'app', 'copy'] as $section) {
             $rules["content.$section"] = 'sometimes|array';
             $rules["content.$section.*"] = 'nullable|string|max:10000';
