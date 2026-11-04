@@ -30,6 +30,23 @@ class HomzyDemoSeeder extends Seeder
                 'name' => 'Rahul Sharma',
                 'password' => Hash::make('password123'),
                 'phone' => '+91 98765 43210',
+                'role' => 'admin',
+                'status' => 'active',
+                'subscription_plan' => 'pro',
+                'email_verified_at' => now(),
+                'last_login_at' => now(),
+            ]
+        );
+
+        // 1b. SEO Specialist Role Account
+        Merchant::firstOrCreate(
+            ['email' => 'seo@kidobox.store'],
+            [
+                'name' => 'SEO Manager',
+                'password' => Hash::make('Seo@123'),
+                'phone' => '+91 98765 43211',
+                'role' => 'seo',
+                'permissions' => ['seo', 'products', 'collections', 'guides', 'banners', 'analytics', 'themes'],
                 'status' => 'active',
                 'subscription_plan' => 'pro',
                 'email_verified_at' => now(),

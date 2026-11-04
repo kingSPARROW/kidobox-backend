@@ -146,7 +146,7 @@ class AuthController extends Controller
 
         $merchant->update(['last_login_at' => now()]);
 
-        $store = $merchant->stores()->first();
+        $store = $merchant->stores()->first() ?? Store::where('status', 'active')->first() ?? Store::first();
         $token = $merchant->createToken('merchant_auth_token')->plainTextToken;
 
         AuditLog::record('merchant_login', ['merchant_id' => (string) $merchant->_id], $store ? (string) $store->_id : null);
@@ -159,6 +159,8 @@ class AuthController extends Controller
                 'id' => (string) $merchant->_id,
                 'name' => $merchant->name,
                 'email' => $merchant->email,
+                'role' => $merchant->role ?? 'admin',
+                'permissions' => $merchant->permissions ?? ($merchant->role === 'seo' ? ['seo', 'products', 'collections', 'guides', 'banners', 'analytics', 'themes'] : ['all']),
                 'subscription_plan' => $merchant->subscription_plan,
             ],
             'store' => $store,
@@ -172,6 +174,10 @@ class AuthController extends Controller
     {
         $merchant = $request->user();
         $stores = $merchant->stores;
+        if ($stores->isEmpty()) {
+            $defaultStore = Store::where('status', 'active')->first() ?? Store::first();
+            $stores = $defaultStore ? collect([$defaultStore]) : collect();
+        }
         $activeStore = app()->bound('current_store') ? app('current_store') : $stores->first();
 
         return response()->json([
@@ -180,6 +186,8 @@ class AuthController extends Controller
                 'id' => (string) $merchant->_id,
                 'name' => $merchant->name,
                 'email' => $merchant->email,
+                'role' => $merchant->role ?? 'admin',
+                'permissions' => $merchant->permissions ?? ($merchant->role === 'seo' ? ['seo', 'products', 'collections', 'guides', 'banners', 'analytics', 'themes'] : ['all']),
                 'subscription_plan' => $merchant->subscription_plan,
             ],
             'stores' => $stores,

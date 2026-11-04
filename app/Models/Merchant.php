@@ -20,6 +20,8 @@ class Merchant extends Model implements AuthenticatableContract
         'password',
         'phone',
         'status', // 'active', 'suspended'
+        'role', // 'admin', 'seo'
+        'permissions',
         'subscription_plan', // 'starter', 'pro', 'enterprise'
         'email_verified_at',
         'last_login_at',
@@ -31,6 +33,7 @@ class Merchant extends Model implements AuthenticatableContract
     ];
 
     protected $casts = [
+        'permissions' => 'array',
         'email_verified_at' => 'datetime',
         'last_login_at' => 'datetime',
     ];
