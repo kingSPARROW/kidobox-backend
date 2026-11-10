@@ -66,6 +66,20 @@ class BannerController extends Controller
             'alt_text' => 'nullable|string|max:255',
         ]);
 
+        // Reject unusable blob URLs
+        if (!empty($validated['desktop_image_url']) && str_starts_with($validated['desktop_image_url'], 'blob:')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Blob URLs cannot be saved. Please re-upload the desktop image.',
+            ], 422);
+        }
+        if (!empty($validated['mobile_image_url']) && str_starts_with($validated['mobile_image_url'], 'blob:')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Blob URLs cannot be saved. Please re-upload the mobile image.',
+            ], 422);
+        }
+
         // Default mobile image to desktop if not provided
         if (empty($validated['mobile_image_url'])) {
             $validated['mobile_image_url'] = $validated['desktop_image_url'];
@@ -133,6 +147,20 @@ class BannerController extends Controller
             'alt_text' => 'nullable|string|max:255',
         ]);
 
+        // Reject unusable blob URLs
+        if (!empty($validated['desktop_image_url']) && str_starts_with($validated['desktop_image_url'], 'blob:')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Blob URLs cannot be saved. Please re-upload the desktop image.',
+            ], 422);
+        }
+        if (!empty($validated['mobile_image_url']) && str_starts_with($validated['mobile_image_url'], 'blob:')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Blob URLs cannot be saved. Please re-upload the mobile image.',
+            ], 422);
+        }
+
         if (array_key_exists('mobile_image_url', $validated) && empty($validated['mobile_image_url']) && !empty($validated['desktop_image_url'])) {
             $validated['mobile_image_url'] = $validated['desktop_image_url'];
         }
@@ -194,7 +222,7 @@ class BannerController extends Controller
     public function uploadImage(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp,avif,gif|max:10240',
+            'image' => 'required|file|mimes:jpeg,png,jpg,webp,avif,gif,svg,jfif,bmp,heic,heif|max:25600',
         ]);
 
         $file = $request->file('image');
