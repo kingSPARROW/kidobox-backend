@@ -207,7 +207,10 @@
         "description": "Give your little one the comfort and care they deserve with the SOULSLINGS Baby Blanket. Specially designed for newborns and growing toddlers, this soft, breathable and lightweight baby wrapper provides a gentle and cozy feel against delicate baby skin. Its versatile design makes it a perfect everyday companion for naps, cuddles, stroller rides and family outings.\n\nSize: 120L x 120W Centimeters\n\nColour: Green",
         "price": 1600,
         "mrp": 1600,
-        "images": []
+        "images": [
+          "kidobox-catalog-media/baby-blankets-05-soulslings-hero.webp",
+          "kidobox-catalog-media/baby-blankets-05-soulslings-detail.webp"
+        ]
       }
     ],
     "image": "kidobox-catalog-media/category-baby-blankets.webp"
