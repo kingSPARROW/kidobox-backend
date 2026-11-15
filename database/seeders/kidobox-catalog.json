@@ -14,6 +14,11 @@
         "images": [
           "kidobox-catalog-media/baby-towels-01-hero.webp",
           "kidobox-catalog-media/baby-towels-01-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -27,6 +32,12 @@
         "images": [
           "kidobox-catalog-media/baby-towels-02-hero.webp",
           "kidobox-catalog-media/baby-towels-02-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -40,6 +51,10 @@
         "images": [
           "kidobox-catalog-media/baby-towels-03-flat.webp",
           "kidobox-catalog-media/baby-towels-03-folded.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -53,6 +68,11 @@
         "images": [
           "kidobox-catalog-media/baby-towels-04-doctor-towels-hero.webp",
           "kidobox-catalog-media/baby-towels-04-doctor-towels-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -66,6 +86,10 @@
         "images": [
           "kidobox-catalog-media/baby-towels-05-mom-care-hero.webp",
           "kidobox-catalog-media/baby-towels-05-mom-care-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       }
     ],
@@ -86,6 +110,12 @@
         "images": [
           "kidobox-catalog-media/baby-winter-blankets-01-brandonn-hero.webp",
           "kidobox-catalog-media/baby-winter-blankets-01-brandonn-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -99,6 +129,10 @@
         "images": [
           "kidobox-catalog-media/baby-winter-blankets-02-first-kick-hero.webp",
           "kidobox-catalog-media/baby-winter-blankets-02-first-kick-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -112,6 +146,11 @@
         "images": [
           "kidobox-catalog-media/baby-winter-blankets-03-tinylane-curated-for-you-hero.webp",
           "kidobox-catalog-media/baby-winter-blankets-03-tinylane-curated-for-you-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -125,6 +164,12 @@
         "images": [
           "kidobox-catalog-media/baby-winter-blankets-04-florida-hero.webp",
           "kidobox-catalog-media/baby-winter-blankets-04-florida-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -138,6 +183,11 @@
         "images": [
           "kidobox-catalog-media/baby-winter-blankets-05-truessentials-hero.webp",
           "kidobox-catalog-media/baby-winter-blankets-05-truessentials-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       }
     ],
@@ -158,6 +208,11 @@
         "images": [
           "kidobox-catalog-media/baby-blankets-01-tinylane-hero.webp",
           "kidobox-catalog-media/baby-blankets-01-tinylane-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -171,6 +226,9 @@
         "images": [
           "kidobox-catalog-media/baby-blankets-02-happy-hues-hero.webp",
           "kidobox-catalog-media/baby-blankets-02-happy-hues-detail.webp"
+        ],
+        "age_stages": [
+          "2+"
         ]
       },
       {
@@ -184,6 +242,11 @@
         "images": [
           "kidobox-catalog-media/baby-blankets-03-haus-and-kinder-hero.webp",
           "kidobox-catalog-media/baby-blankets-03-haus-and-kinder-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -197,6 +260,12 @@
         "images": [
           "kidobox-catalog-media/baby-blankets-04-momness-hero.webp",
           "kidobox-catalog-media/baby-blankets-04-momness-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -210,6 +279,11 @@
         "images": [
           "kidobox-catalog-media/baby-blankets-05-soulslings-hero.webp",
           "kidobox-catalog-media/baby-blankets-05-soulslings-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       }
     ],
@@ -230,6 +304,10 @@
         "images": [
           "kidobox-catalog-media/burp-cloths-01-dotmom-hero.webp",
           "kidobox-catalog-media/burp-cloths-01-dotmom-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -243,6 +321,10 @@
         "images": [
           "kidobox-catalog-media/burp-cloths-02-nintarababy-hero.webp",
           "kidobox-catalog-media/burp-cloths-02-nintarababy-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -256,6 +338,10 @@
         "images": [
           "kidobox-catalog-media/burp-cloths-03-mom-care-hero.webp",
           "kidobox-catalog-media/burp-cloths-03-mom-care-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -269,6 +355,10 @@
         "images": [
           "kidobox-catalog-media/burp-cloths-04-tidy-sleep-hero.webp",
           "kidobox-catalog-media/burp-cloths-04-tidy-sleep-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -282,6 +372,10 @@
         "images": [
           "kidobox-catalog-media/burp-cloths-05-synrroe-hero.webp",
           "kidobox-catalog-media/burp-cloths-05-synrroe-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       }
     ],
@@ -302,6 +396,10 @@
         "images": [
           "kidobox-catalog-media/baby-bedding-sheets-01-bright-d-cor-hero.webp",
           "kidobox-catalog-media/baby-bedding-sheets-01-bright-d-cor-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -315,6 +413,10 @@
         "images": [
           "kidobox-catalog-media/baby-bedding-sheets-02-cottington-lane-hero.webp",
           "kidobox-catalog-media/baby-bedding-sheets-02-cottington-lane-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -328,6 +430,11 @@
         "images": [
           "kidobox-catalog-media/baby-bedding-sheets-03-rudra-creation-hero.webp",
           "kidobox-catalog-media/baby-bedding-sheets-03-rudra-creation-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -341,6 +448,10 @@
         "images": [
           "kidobox-catalog-media/baby-bedding-sheets-04-bhoomi-impex-hero.webp",
           "kidobox-catalog-media/baby-bedding-sheets-04-bhoomi-impex-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -354,6 +465,10 @@
         "images": [
           "kidobox-catalog-media/baby-bedding-sheets-05-the-white-cradle-hero.webp",
           "kidobox-catalog-media/baby-bedding-sheets-05-the-white-cradle-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       }
     ],
@@ -374,6 +489,12 @@
         "images": [
           "kidobox-catalog-media/baby-hankies-01-little-boo-hero.webp",
           "kidobox-catalog-media/baby-hankies-01-little-boo-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -387,6 +508,10 @@
         "images": [
           "kidobox-catalog-media/baby-hankies-02-glun-hero.webp",
           "kidobox-catalog-media/baby-hankies-02-glun-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -400,6 +525,12 @@
         "images": [
           "kidobox-catalog-media/baby-hankies-03-trance-home-linen-hero.webp",
           "kidobox-catalog-media/baby-hankies-03-trance-home-linen-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -413,6 +544,12 @@
         "images": [
           "kidobox-catalog-media/baby-hankies-04-outlay-home-hero.webp",
           "kidobox-catalog-media/baby-hankies-04-outlay-home-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -426,6 +563,9 @@
         "images": [
           "kidobox-catalog-media/baby-hankies-05-puretique-hero.webp",
           "kidobox-catalog-media/baby-hankies-05-puretique-detail.webp"
+        ],
+        "age_stages": [
+          "2+"
         ]
       }
     ],
@@ -446,6 +586,10 @@
         "images": [
           "kidobox-catalog-media/hooded-towels-01-nintarababy-hero.webp",
           "kidobox-catalog-media/hooded-towels-01-nintarababy-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -459,6 +603,10 @@
         "images": [
           "kidobox-catalog-media/hooded-towels-02-famyo-hero.webp",
           "kidobox-catalog-media/hooded-towels-02-famyo-detail.webp"
+        ],
+        "age_stages": [
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -472,6 +620,11 @@
         "images": [
           "kidobox-catalog-media/hooded-towels-03-haus-and-kinder-hero.webp",
           "kidobox-catalog-media/hooded-towels-03-haus-and-kinder-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -485,6 +638,11 @@
         "images": [
           "kidobox-catalog-media/hooded-towels-04-first-kick-hero.webp",
           "kidobox-catalog-media/hooded-towels-04-first-kick-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -498,6 +656,10 @@
         "images": [
           "kidobox-catalog-media/hooded-towels-05-dotmom-hero.webp",
           "kidobox-catalog-media/hooded-towels-05-dotmom-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       }
     ],
@@ -518,6 +680,11 @@
         "images": [
           "kidobox-catalog-media/knitted-baby-quilts-01-haus-and-kinder-hero.webp",
           "kidobox-catalog-media/knitted-baby-quilts-01-haus-and-kinder-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -531,6 +698,10 @@
         "images": [
           "kidobox-catalog-media/knitted-baby-quilts-02-pluchi-hero.webp",
           "kidobox-catalog-media/knitted-baby-quilts-02-pluchi-detail.webp"
+        ],
+        "age_stages": [
+          "1-2",
+          "2+"
         ]
       },
       {
@@ -544,6 +715,10 @@
         "images": [
           "kidobox-catalog-media/knitted-baby-quilts-03-infantso-hero.webp",
           "kidobox-catalog-media/knitted-baby-quilts-03-infantso-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -557,6 +732,11 @@
         "images": [
           "kidobox-catalog-media/knitted-baby-quilts-04-the-baby-first-box-hero.webp",
           "kidobox-catalog-media/knitted-baby-quilts-04-the-baby-first-box-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       },
       {
@@ -570,6 +750,11 @@
         "images": [
           "kidobox-catalog-media/knitted-baby-quilts-05-pluchi-hero.webp",
           "kidobox-catalog-media/knitted-baby-quilts-05-pluchi-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       }
     ],
@@ -590,6 +775,9 @@
         "images": [
           "kidobox-catalog-media/sleeping-swaddle-pods-01-the-boo-boo-club-hero.webp",
           "kidobox-catalog-media/sleeping-swaddle-pods-01-the-boo-boo-club-detail.webp"
+        ],
+        "age_stages": [
+          "0-6"
         ]
       },
       {
@@ -603,7 +791,8 @@
         "images": [
           "kidobox-catalog-media/sleeping-swaddle-pods-02-nintarababy-hero.webp",
           "kidobox-catalog-media/sleeping-swaddle-pods-02-nintarababy-detail.webp"
-        ]
+        ],
+        "age_stages": []
       },
       {
         "number": 3,
@@ -616,6 +805,9 @@
         "images": [
           "kidobox-catalog-media/sleeping-swaddle-pods-03-snowie-soft-hero.webp",
           "kidobox-catalog-media/sleeping-swaddle-pods-03-snowie-soft-detail.webp"
+        ],
+        "age_stages": [
+          "0-6"
         ]
       },
       {
@@ -629,6 +821,9 @@
         "images": [
           "kidobox-catalog-media/sleeping-swaddle-pods-04-cocoon-care-hero.webp",
           "kidobox-catalog-media/sleeping-swaddle-pods-04-cocoon-care-detail.webp"
+        ],
+        "age_stages": [
+          "0-6"
         ]
       },
       {
@@ -642,6 +837,10 @@
         "images": [
           "kidobox-catalog-media/sleeping-swaddle-pods-05-the-mom-store-hero.webp",
           "kidobox-catalog-media/sleeping-swaddle-pods-05-the-mom-store-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       }
     ],
@@ -662,6 +861,9 @@
         "images": [
           "kidobox-catalog-media/wrappers-and-swaddles-01-nintarababy-hero.webp",
           "kidobox-catalog-media/wrappers-and-swaddles-01-nintarababy-detail.webp"
+        ],
+        "age_stages": [
+          "0-6"
         ]
       },
       {
@@ -675,6 +877,10 @@
         "images": [
           "kidobox-catalog-media/wrappers-and-swaddles-02-first-kick-hero.webp",
           "kidobox-catalog-media/wrappers-and-swaddles-02-first-kick-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -688,6 +894,10 @@
         "images": [
           "kidobox-catalog-media/wrappers-and-swaddles-03-brandonn-hero.webp",
           "kidobox-catalog-media/wrappers-and-swaddles-03-brandonn-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12"
         ]
       },
       {
@@ -701,6 +911,9 @@
         "images": [
           "kidobox-catalog-media/wrappers-and-swaddles-04-first-kick-hero.webp",
           "kidobox-catalog-media/wrappers-and-swaddles-04-first-kick-detail.webp"
+        ],
+        "age_stages": [
+          "0-6"
         ]
       },
       {
@@ -714,6 +927,11 @@
         "images": [
           "kidobox-catalog-media/wrappers-and-swaddles-05-oyo-baby-hero.webp",
           "kidobox-catalog-media/wrappers-and-swaddles-05-oyo-baby-detail.webp"
+        ],
+        "age_stages": [
+          "0-6",
+          "6-12",
+          "1-2"
         ]
       }
     ],
