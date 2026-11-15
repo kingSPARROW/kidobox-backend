@@ -62,7 +62,8 @@
           "kidobox-catalog-media/baby-towels-05-mom-care-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-baby-towels.webp"
   },
   {
     "name": "Baby Winter Blankets",
@@ -133,7 +134,8 @@
           "kidobox-catalog-media/baby-winter-blankets-05-truessentials-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-baby-winter-blankets.webp"
   },
   {
     "name": "Baby Blankets",
@@ -201,7 +203,8 @@
         "mrp": 1600,
         "images": []
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-baby-blankets.webp"
   },
   {
     "name": "Burp Cloths",
@@ -272,7 +275,8 @@
           "kidobox-catalog-media/burp-cloths-05-synrroe-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-burp-cloths.webp"
   },
   {
     "name": "Baby Bedding Sheets",
@@ -343,7 +347,8 @@
           "kidobox-catalog-media/baby-bedding-sheets-05-the-white-cradle-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-baby-bedding-sheets.webp"
   },
   {
     "name": "Baby Hankies",
@@ -414,7 +419,8 @@
           "kidobox-catalog-media/baby-hankies-05-puretique-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-baby-hankies.webp"
   },
   {
     "name": "Hooded Towels",
@@ -485,7 +491,8 @@
           "kidobox-catalog-media/hooded-towels-05-dotmom-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-hooded-towels.webp"
   },
   {
     "name": "Knitted Baby Quilts",
@@ -556,7 +563,8 @@
           "kidobox-catalog-media/knitted-baby-quilts-05-pluchi-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-knitted-baby-quilts.webp"
   },
   {
     "name": "Sleeping Swaddle Pods",
@@ -627,7 +635,8 @@
           "kidobox-catalog-media/sleeping-swaddle-pods-05-the-mom-store-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-sleeping-swaddle-pods.webp"
   },
   {
     "name": "Wrappers & Swaddles",
@@ -698,6 +707,7 @@
           "kidobox-catalog-media/wrappers-and-swaddles-05-oyo-baby-detail.webp"
         ]
       }
-    ]
+    ],
+    "image": "kidobox-catalog-media/category-wrappers-and-swaddles.webp"
   }
 ]

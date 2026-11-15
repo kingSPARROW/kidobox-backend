@@ -7,11 +7,12 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Store;
 use Illuminate\Database\Seeder;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
 class KidoboxCatalogSeeder extends Seeder
 {
-    public function run(): void
+    public function run(bool $publish = false): void
     {
         $catalog = json_decode(
             file_get_contents(__DIR__.'/kidobox-catalog.json'),
@@ -22,11 +23,12 @@ class KidoboxCatalogSeeder extends Seeder
         $media = Storage::disk('public');
 
         foreach ($catalog as $category) {
+            if (isset($category['image'])) {
+                $this->storeImage($media, $category['image']);
+            }
             foreach ($category['products'] as $entry) {
                 foreach ($entry['images'] as $path) {
-                    if (! $media->exists($path) && ! is_file(__DIR__.'/'.$path)) {
-                        throw new \RuntimeException("Missing catalog image: {$path}");
-                    }
+                    $this->storeImage($media, $path);
                 }
             }
         }
@@ -36,6 +38,12 @@ class KidoboxCatalogSeeder extends Seeder
                 ['store_id' => $storeId, 'slug' => $category['slug']],
                 ['title' => $category['name'], 'type' => 'manual', 'is_published' => false],
             );
+            if (isset($category['image'])) {
+                $collection->update([
+                    'image_url' => $media->url($category['image']),
+                    'image_alt' => $category['name'],
+                ]);
+            }
             $collectionId = (string) $collection->getKey();
 
             foreach ($category['products'] as $entry) {
@@ -54,11 +62,6 @@ class KidoboxCatalogSeeder extends Seeder
                     $product->fill(['status' => 'draft', 'has_variants' => false]);
                 }
                 if ($entry['images'] !== []) {
-                    foreach ($entry['images'] as $path) {
-                        if (! $media->exists($path) && ! $media->put($path, file_get_contents(__DIR__.'/'.$path))) {
-                            throw new \RuntimeException("Could not store catalog image: {$path}");
-                        }
-                    }
                     $product->images = array_map(fn ($path) => $media->url($path), $entry['images']);
                 }
                 $product->save();
@@ -79,6 +82,30 @@ class KidoboxCatalogSeeder extends Seeder
                 }
                 $variant->save();
             }
+        }
+
+        if ($publish) {
+            Collection::where('store_id', $storeId)
+                ->whereIn('slug', array_column($catalog, 'slug'))
+                ->update(['is_published' => true]);
+            foreach ($catalog as $category) {
+                Product::where('store_id', $storeId)
+                    ->whereIn('slug', array_column($category['products'], 'slug'))
+                    ->where('status', 'draft')
+                    ->update(['status' => 'active']);
+            }
+        }
+    }
+
+    private function storeImage(Filesystem $media, string $path): void
+    {
+        if ($media->exists($path)) {
+            return;
+        }
+
+        $source = __DIR__.'/'.$path;
+        if (! is_file($source) || ! $media->put($path, file_get_contents($source))) {
+            throw new \RuntimeException("Could not store catalog image: {$path}");
         }
     }
 }
