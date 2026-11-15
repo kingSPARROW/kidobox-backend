@@ -47,7 +47,11 @@ class ProductController extends Controller
             $query->where('collection_ids', $collectionId);
         }
 
-        $perPage = min((int) ($request->query('per_page', 15)), 100);
+        if ($type = $request->query('product_type')) {
+            $query->where('product_type', $type);
+        }
+
+        $perPage = max(1, min((int) $request->query('per_page', 15), 100));
         $products = $query->latest()->paginate($perPage);
 
         return response()->json([
@@ -58,6 +62,11 @@ class ProductController extends Controller
                 'last_page' => $products->lastPage(),
                 'per_page' => $products->perPage(),
                 'total' => $products->total(),
+                ...($request->boolean('include_types') ? [
+                    'product_types' => Product::query()->toBase()
+                        ->whereNotNull('product_type')->distinct('product_type')
+                        ->get()->filter()->sort()->values()->all(),
+                ] : []),
             ],
         ]);
     }
